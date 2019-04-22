@@ -1,0 +1,83 @@
+package com.atm;
+
+/**
+ * @(#)second_atm.java
+ *
+ *
+ * @author 
+ * 
+ */
+
+import javax.swing.*;
+
+import com.util.ATMSession;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.*;
+
+public class CashDepositDetails_old extends JFrame implements ActionListener {
+
+	JButton btnBack = new JButton(new ImageIcon("btnBack.jpg"));
+
+	public void clear() {
+
+		/*
+		 * txtUser.setText(""); txtFName.setText(""); txtPass.setText("");
+		 * txtLName.setText(""); txtVPass.setText("");
+		 */
+	}
+
+	public CashDepositDetails_old() {
+		super("Project");
+
+		JPanel pane = new JPanel();
+		pane.setLayout(null);
+
+		btnBack.setBounds(50, 570, 320, 80);
+		// pane.add(btnConfirmEdit);
+		pane.add(btnBack);
+		// btnConfirmEdit.addActionListener(this);
+		btnBack.addActionListener(this);
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		JLabel lbl = new JLabel(new ImageIcon("back.jpg"));
+
+		lbl.setBounds(405, 0, dim.width - 800, dim.height);
+		pane.add(lbl);
+
+		setContentPane(pane);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		pane.setBorder(BorderFactory.createTitledBorder(
+				BorderFactory.createEtchedBorder(), "Cash Deposit Details"));
+
+	}
+
+	public void actionPerformed(ActionEvent e) {
+
+		Object source = e.getSource();
+		if (source == btnBack) {
+			ATMSession.getInstance().removeItem("usersearcheduserid");
+			CashDepositUserSearch log = new CashDepositUserSearch();
+			Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+			// this.setLocation(x, y);
+			log.setLocation(0, 0);
+			log.setSize(dim.width, dim.height);
+			log.setTitle("CashDeposit-User-Search");
+			log.setResizable(false);
+			log.setVisible(true);
+			dispose();
+		}
+
+	}
+
+	public static void main(String[] args) {
+		CashDepositDetails_old log = new CashDepositDetails_old();
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		log.setLocation(0, 0);
+		log.setSize(dim.width, dim.height);
+		log.setTitle("Cash Deposit Details");
+		log.setResizable(false);
+		log.setVisible(true);
+	}
+
+}
